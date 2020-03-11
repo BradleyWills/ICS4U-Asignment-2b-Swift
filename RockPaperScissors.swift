@@ -6,7 +6,7 @@
 
 // Create variables
 var randInt:Int = 0
-var randInput:String = ""
+var randInput:String?
 var userInt:Int = 0
 var gameCount:Int = 0
 var winCount:Int = 0
@@ -14,7 +14,9 @@ var finished = false
 var finished2 = false
 
 while finished == false {
-    randInt = Int.random(in: 0..<4)
+    print("Input rock, paper, or scissors.")
+    randInt = Int.random(in: 1..<4)
+    print("The random number is \(randInt)")
     // Defines the random choice as a string
     if randInt == 1 {
         randInput = "rock"
@@ -39,32 +41,35 @@ while finished == false {
                 gameCount += 1
             } else if randInt == userInt + 1 || randInt == userInt - 2 {
                 // You lose
-                print("You lost. You chose \(userInput) and the enemy chose \(randInput).")
+                print("You lost. You chose \(userInput) and the enemy chose \(randInput!).")
                 gameCount += 1
             } else {
                 // You win
-                print("You won. You chose \(userInput) and the enemy chose \(randInput).")
+                print("You won. You chose \(userInput) and the enemy chose \(randInput!).")
                 winCount += 1
                 gameCount += 1
             }
-            print("Do you want to keep playing?")
-            while finished2 == false {
-                print("Input yes or no.")
-                // Ask for input
-                if let yesOrNoInput = readLine() {
-                    if yesOrNoInput == "no" {
-                        print("Your win percentage was %\(winCount / gameCount * 100).")
-                        finished = true
-                        finished2 = true
-                    } else if yesOrNoInput == "yes" {
-                        finished2 = true
-                    } else {
-                        print("Invalid Input.")
+        } else {
+            print("Invalid Input.")
+        }
+        print("Do you want to keep playing?")
+        finished2 = false
+        while finished2 == false {
+            print("Input yes or no.")
+            // Ask for input
+            if let yesOrNoInput = readLine() {
+                if yesOrNoInput == "no" {
+                    if !(gameCount == 0) {
+                        print("Your win percentage was %\(Double(winCount) / Double(gameCount) * 100).")
                     }
+                    finished = true
+                    finished2 = true
+                } else if yesOrNoInput == "yes" {
+                    finished2 = true
+                } else {
+                    print("Invalid Input.")
                 }
             }
         }
-    } else {
-        print("Invalid Input.")
     }
 }
