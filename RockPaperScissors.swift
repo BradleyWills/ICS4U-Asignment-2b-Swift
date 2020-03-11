@@ -16,7 +16,6 @@ var finished2 = false
 while finished == false {
     print("Input rock, paper, or scissors.")
     randInt = Int.random(in: 1..<4)
-    print("The random number is \(randInt)")
     // Defines the random choice as a string
     if randInt == 1 {
         randInput = "rock"
